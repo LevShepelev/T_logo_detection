@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "t-logo-detection"          # project name (can have hyphens)
+version = "0.1.0"
+description = "T-Bank logo detector: zero-shot annotation + small-model training + REST API"
+authors = ["you <you@example.com>"]
+readme = "README.md"
+
+# Tell Poetry what REAL Python packages to include
+packages = [
+  { include = "annotator" },
+  { include = "app" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13.2"
+numpy = "^1.24"
+pillow = "^10.3"
+opencv-python = "^4.6"
+tqdm = "^4.66"
+transformers = ">=4.41"
+huggingface_hub = ">=0.23"
+safetensors = ">=0.4"
+# Install torch/torchvision for your CUDA via pip after poetry install (see below)
+torch = ">=2.5.1"
+torchvision = ">=0.2"
+scipy = ">=0.15"
+
+[tool.poetry.group.train]
+optional = true
+[tool.poetry.group.train.dependencies]
+ultralytics = "^8.3.0"
+onnx = "^1.16.0"
+onnxruntime-gpu = "^1.17.0"
+
+[tool.poetry.group.ocr]
+optional = true
+[tool.poetry.group.ocr.dependencies]
+paddleocr = "==2.7.0.3"
+paddlepaddle = "==2.6.1"
+
+[tool.poetry.scripts]
+tbank-annotate = "annotator.tbank_annotate.cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"

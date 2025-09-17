@@ -1,0 +1,17 @@
+# training/configs/data.yaml
+# Корень датасета с разложением в стиле YOLO:
+# ./data/yolo/
+#   images/train, images/val
+#   labels/train, labels/val
+path: ./data/yolo
+
+train: images/train
+val: images/val
+# test: images/test   # (опционально, если есть)
+
+# Один класс — логотип Т-банка
+names:
+  0: t_logo
+
+# Для совместимости со старыми тулчейнами (не обязательно для v8):
+nc: 1
