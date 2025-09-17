@@ -203,36 +203,6 @@ curl -X POST "http://localhost:8000/detect" \
 
 🐳 Docker
 
-Минимальный образ с Poetry:
-
-# Dockerfile
-FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
-
-ENV DEBIAN_FRONTEND=noninteractive \
-    POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_NO_INTERACTION=1
-
-RUN apt-get update && apt-get install -y python3 python3-pip curl git libgl1 && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir pipx && pipx install poetry
-
-WORKDIR /app
-COPY pyproject.toml README.md ./
-# базовые deps (без train): затем вручную установим torch с нужной CUDA
-RUN poetry install --only main
-
-# PyTorch CUDA (пример cu121; подмените при необходимости)
-RUN . .venv/bin/activate && pip install --index-url https://download.pytorch.org/whl/cu121 \
-    "torch==2.4.0" "torchvision==0.19.0"
-
-# код приложения и модели
-COPY annotator/ annotator/
-COPY app/ app/
-COPY models/ models/
-
-EXPOSE 8000
-CMD ["poetry","run","python","-m","app.main"]
-
-
 Сборка и запуск:
 
 docker build -t tbank-detector .

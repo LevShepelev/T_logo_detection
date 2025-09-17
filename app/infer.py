@@ -1,6 +1,5 @@
 import torch, numpy as np
 from PIL import Image, ImageOps
-import cv2
 
 class TBankDetector:
     def __init__(self, weights="models/tbank_detector.pt", device=None, imgsz=896, score=0.30, iou=0.50):

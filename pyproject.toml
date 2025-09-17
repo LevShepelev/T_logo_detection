@@ -24,6 +24,12 @@ safetensors = ">=0.4"
 torch = ">=2.5.1"
 torchvision = ">=0.2"
 scipy = ">=0.15"
+fastapi = ">=0.116.1"
+uvicorn = {version = "^0.30.0", extras = ["standard"]}  # uvicorn.run in app.main
+python-multipart = "^0.0.9"          # REQUIRED for UploadFile handling
+ultralytics = "^8.3.0"
+opencv-python-headless = "^4.9"
+
 
 [tool.poetry.group.train]
 optional = true
